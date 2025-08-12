@@ -1,0 +1,3 @@
+[toolchain]
+# Make sure this is always synced with Dockerfile
+channel = "nightly-2025-08-10"
