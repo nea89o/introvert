@@ -14,10 +14,10 @@ COPY --from=planner /app/recipe.json recipe.json
 RUN cargo chef cook --release --target x86_64-unknown-linux-musl --recipe-path recipe.json
 COPY . .
 RUN rm rust-toolchain.toml
-RUN cargo build --release --target x86_64-unknown-linux-musl --bin helios
+RUN cargo build --release --target x86_64-unknown-linux-musl --bin introvert
 
 FROM docker.io/alpine:3 AS runtime
 WORKDIR /app
 ENV RUST_LOG=error,introvert=info
-COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/helios /usr/local/bin/
-CMD ["/usr/local/bin/helios"]
+COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/introvert /usr/local/bin/
+CMD ["/usr/local/bin/introvert"]
